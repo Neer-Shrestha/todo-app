@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon-32x32.png" />
+    <title>Frontend Mentor | Todo app</title>
+    <link rel="stylesheet" href="assets/css/style.min.css" />
+</head>
+
+<body class="light-theme">
+    <header class="site-header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="site-brand">TODO</a>
+                <button type="button" class="theme-toggler" aria-label="theme-toggle">
+                    <img src="assets/img/icon-moon.svg" alt="theme icon" />
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="todos">
+        <div class="container">
+            <form class="todo-form">
+                <input type="text" placeholder="Add your todos" class="form-control" />
+            </form>
+            <div class="nav-tabs">
+                <div class="tab-content">
+                    <div class="nav-tab active">
+                        <ul class="todo-list">
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="todo-check" class="form-checkbox">
+                                    <span class="text">All</span>
+                                    <button class="btn-delete"></button>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="todo-check" class="form-checkbox">
+                                    <span class="text">All</span>
+                                    <button class="btn-delete"></button>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End of nav tab -->
+                    <div class="nav-tab ">
+                        <ul class="todo-list">
+                            <li>
+                                <input type="checkbox" name="todo-check" class="form-checkbox">
+                                <span class="text">Active</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="todo-check" class="form-checkbox">
+                                <span class="text">Active</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="todo-check" class="form-checkbox">
+                                <span class="text">Active</span>
+                                <span class="btn-delete"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End of nav tab -->
+                    <div class="nav-tab ">
+                        <ul class="todo-list">
+                            <li>
+                                <input type="checkbox" name="todo-check" class="form-checkbox">
+                                <span class="text">Completed</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="todo-check" class="form-checkbox">
+                                <span class="text">Completed</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="todo-check" class="form-checkbox">
+                                <span class="text">Completed</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End of nav tab -->
+
+                </div>
+                <!-- End of tab content -->
+                <div class="tab-footer">
+                    <span class="pending-todos">
+                        5 items left
+                    </span>
+                    <ul class="tab-list">
+                        <li><button class="nav-btn active" data-tag="all">All</button></li>
+                        <li><button class="nav-btn" data-tag="active">Active</button></li>
+                        <li><button class="nav-btn" data-tag="completed">Completed</button></li>
+                    </ul>
+                    <button class="btn-clear">Clear Completed</button>
+                </div>
+                <!-- End of tab footer -->
+            </div>
+            <!-- End of nav tabs -->
+        </div>
+    </div>
+
+    <!-- javascript -->
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
