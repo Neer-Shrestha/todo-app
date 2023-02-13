@@ -128,15 +128,15 @@ ul {
 
 .todo-list {
     li {
-        label {
+        & > * {
             padding: 20px 25px;
             display: flex;
             gap: 20px;
             background-color: var(--clr-content-bg);
-            cursor: pointer;
 
             .text {
                 flex: 1;
+                cursor: pointer;
             }
         }
         &:not(:last-child) {
@@ -155,6 +155,7 @@ ul {
     position: relative;
     background: var(--clr-placeholder);
     transition: var(--transition);
+    cursor: pointer;
 
     &::before {
         content: "";
@@ -243,8 +244,15 @@ ul {
     }
 }
 
+.content-none {
+    text-align: center;
+    padding: 20px;
+}
 .fade-in-left {
     animation: fadeInLeft 0.4s forwards;
+}
+.fade-out-left {
+    animation: fadeOutLeft 0.4s forwards;
 }
 
 @keyframes fadeInLeft {
@@ -258,13 +266,26 @@ ul {
     }
 }
 
+@keyframes fadeOutLeft {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+}
+
 @keyframes fadeIn {
     from {
         transform: translateY(50px);
         opacity: 0;
+        pointer-events: none;
     }
     to {
         transform: translateY(0);
         opacity: 1;
+        pointer-events: all;
     }
 }

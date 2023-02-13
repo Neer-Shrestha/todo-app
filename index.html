@@ -28,58 +28,10 @@
             </form>
             <div class="nav-tabs">
                 <div class="tab-content">
-                    <div class="nav-tab active">
-                        <ul class="todo-list">
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="todo-check" class="form-checkbox">
-                                    <span class="text">All</span>
-                                    <button class="btn-delete"></button>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="todo-check" class="form-checkbox">
-                                    <span class="text">All</span>
-                                    <button class="btn-delete"></button>
-                                </label>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- End of nav tab -->
-                    <div class="nav-tab ">
-                        <ul class="todo-list">
-                            <li>
-                                <input type="checkbox" name="todo-check" class="form-checkbox">
-                                <span class="text">Active</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="todo-check" class="form-checkbox">
-                                <span class="text">Active</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="todo-check" class="form-checkbox">
-                                <span class="text">Active</span>
-                                <span class="btn-delete"></span>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- End of nav tab -->
-                    <div class="nav-tab ">
-                        <ul class="todo-list">
-                            <li>
-                                <input type="checkbox" name="todo-check" class="form-checkbox">
-                                <span class="text">Completed</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="todo-check" class="form-checkbox">
-                                <span class="text">Completed</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="todo-check" class="form-checkbox">
-                                <span class="text">Completed</span>
-                            </li>
-                        </ul>
+                    <div class="nav-tab active" data-tag="all">
+                        <p class="content-none">
+                            There are no todos available.
+                        </p>
                     </div>
                     <!-- End of nav tab -->
 
@@ -103,7 +55,7 @@
     </div>
 
     <!-- javascript -->
-    <script src="assets/js/script.js"></script>
+    <script defer src="assets/js/script.js"></script>
 </body>
 
 </html>
