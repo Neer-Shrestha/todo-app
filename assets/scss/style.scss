@@ -117,6 +117,14 @@ ul {
     margin-top: 25px;
     border-radius: 5px;
 
+    .tab-content {
+        &:has(li) {
+            .content-none {
+                display: none;
+            }
+        }
+    }
+
     .nav-btn {
         color: var(--clr-text);
 
@@ -127,6 +135,17 @@ ul {
 }
 
 .todo-list {
+    &.active {
+        li:has(.checked) {
+            display: none;
+        }
+    }
+    &.complete {
+        li.active {
+            display: none;
+        }
+    }
+
     li {
         & > * {
             padding: 20px 25px;
@@ -178,7 +197,8 @@ ul {
         background-color: var(--clr-content-bg);
     }
 
-    &:checked {
+    &:checked,
+    &.checked {
         background: linear-gradient(90deg, #57ddff 0%, #c058f3 100%);
 
         &::after {
@@ -192,14 +212,6 @@ ul {
 }
 
 .nav-tabs {
-    .nav-tab {
-        display: none;
-
-        &.active {
-            display: block;
-            animation: fadeIn 0.3s forwards;
-        }
-    }
     .btn-delete {
         --size: 18px;
         width: var(--size);

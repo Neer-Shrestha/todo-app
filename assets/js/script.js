@@ -47,8 +47,6 @@ themeToggler.addEventListener("click", () => {
     themeUpdate();
 });
 
-// add data tags to nav tab
-
 // nav tab
 const navTabContainer = document.querySelector(".nav-tabs");
 const navBtn = navTabContainer.querySelectorAll(".nav-btn");
@@ -59,9 +57,29 @@ navBtn.forEach((btn, index) => {
     btn.setAttribute("data-tab-index", index);
 
     btn.addEventListener("click", (e) => {
-        const idx = e.currentTarget.getAttribute("data-tab-index");
+        const curTarget = e.currentTarget;
+        const idx = curTarget.getAttribute("data-tab-index");
+        const tag = curTarget.getAttribute("data-tag");
+        const todoList = document.querySelector(".todo-list");
+        const todoClassList = todoList.classList;
+        const listItems = todoList.querySelectorAll("li");
 
-        // removeThenAddClassInList(navTabContent, "active", idx);
+        listItems.forEach((item) => {
+            const checkbox = item.querySelector(".form-checkbox").classList;
+            if (!checkbox.contains("checked")) {
+                item.classList.add("active");
+            }
+        });
+
+        if (todoClassList.contains("all")) {
+            todoClassList.remove("all");
+        } else if (todoClassList.contains("active")) {
+            todoClassList.remove("active");
+        } else if (todoClassList.contains("complete")) {
+            todoClassList.remove("complete");
+        }
+        todoClassList.add(tag);
+
         removeThenAddClassInList(navBtn, "active", idx);
     });
 });
@@ -93,7 +111,7 @@ todosForm.addEventListener("submit", (e) => {
     const todoContent = textField.value;
 
     if (todoContent != "") {
-        addTodo(todoContent, todoListAll);
+        addTodo(todoContent, todoListAll, false);
     }
     updateLS();
 
@@ -112,11 +130,12 @@ function createTodoList(container, extraClass) {
 let todos = JSON.parse(localStorage.getItem("todos"));
 if (todos) {
     todos.forEach((element) => {
-        addTodo(element.text, todoListAll);
+        const isChecked = element.complete;
+        addTodo(element.text, todoListAll, isChecked);
     });
 }
 
-function addTodo(value, list) {
+function addTodo(value, list, checked) {
     const li = document.createElement("li");
 
     const label = document.createElement("span");
@@ -125,11 +144,18 @@ function addTodo(value, list) {
     const input = document.createElement("input");
     input.setAttribute("type", "checkbox");
     input.classList.add("form-checkbox");
+    if (checked) {
+        input.classList.add("checked");
+    }
+
     label.appendChild(input);
 
     const text = document.createElement("span");
     text.classList.add("text");
     text.textContent = value;
+    if (checked) {
+        text.classList.add("complete");
+    }
     label.appendChild(text);
 
     const deleteBtn = document.createElement("button");
@@ -151,7 +177,11 @@ function addTodo(value, list) {
             updateLS();
         }, 200);
     });
-    input.addEventListener("click", () => {
+    if (checked) {
+        input.checked = checked;
+    }
+    input.addEventListener("click", (e) => {
+        e.currentTarget.classList.toggle("checked");
         text.classList.toggle("complete");
         updateLS();
     });
