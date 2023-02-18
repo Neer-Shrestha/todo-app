@@ -147,6 +147,9 @@ ul {
     }
 
     li {
+        &.dragging {
+            opacity: 0.5;
+        }
         & > * {
             padding: 20px 25px;
             display: flex;

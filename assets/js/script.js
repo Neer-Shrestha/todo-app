@@ -124,7 +124,37 @@ function createTodoList(container, extraClass) {
     list.classList.add("todo-list");
     list.classList.add(extraClass);
 
+    list.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        const afterElement = getDragAfterElement(list, e.clientY);
+        const draggable = document.querySelector(".dragging");
+        if (afterElement == null) {
+            list.appendChild(draggable);
+        } else {
+            list.insertBefore(draggable, afterElement);
+        }
+        updateLS();
+    });
+
     container.appendChild(list);
+}
+
+// copied from WebDevSimplified youtube
+function getDragAfterElement(container, y) {
+    const draggableElements = [...container.querySelectorAll(".draggable:not(.dragging)")];
+
+    return draggableElements.reduce(
+        (closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        },
+        { offset: Number.NEGATIVE_INFINITY }
+    ).element;
 }
 
 let todos = JSON.parse(localStorage.getItem("todos"));
@@ -137,6 +167,8 @@ if (todos) {
 
 function addTodo(value, list, checked) {
     const li = document.createElement("li");
+    li.classList.add("draggable");
+    li.setAttribute("draggable", true);
 
     const label = document.createElement("span");
     li.appendChild(label);
@@ -185,6 +217,14 @@ function addTodo(value, list, checked) {
         text.classList.toggle("complete");
         updateLS();
     });
+
+    li.addEventListener("dragstart", () => {
+        li.classList.add("dragging");
+    });
+
+    li.addEventListener("dragend", () => {
+        li.classList.remove("dragging");
+    });
 }
 
 // update LocalStorage
@@ -205,9 +245,10 @@ function updateLS() {
 // clear
 const btnClear = document.querySelector(".btn-clear");
 btnClear.addEventListener("click", () => {
-    let todos = JSON.parse(localStorage.getItem("todos"));
-    let arr = [];
-
-    todos.filter((cur) => (!cur.complete ? arr.push(cur) : null));
-    localStorage.setItem("todos", JSON.stringify(arr));
+    const completed = document.querySelectorAll(".complete");
+    completed.forEach((complete) => {
+        const parent = complete.parentElement.parentElement;
+        parent.remove();
+    });
+    updateLS();
 });
