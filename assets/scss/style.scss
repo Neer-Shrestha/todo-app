@@ -65,7 +65,7 @@ ul {
 .container {
     max-width: 550px;
     margin: 0 auto;
-    padding: 0 12px;
+    padding: 0 20px;
 }
 
 .site-brand {
@@ -110,6 +110,10 @@ ul {
 .todos {
     margin-top: -150px;
     padding-bottom: 50px;
+
+    @media (max-width: 767.98px) {
+        padding-bottom: 20px;
+    }
 }
 
 .nav-tabs {
@@ -124,13 +128,13 @@ ul {
             }
         }
     }
+}
+.nav-btn {
+    color: var(--clr-text);
+    font-weight: 600;
 
-    .nav-btn {
-        color: var(--clr-text);
-
-        &.active {
-            color: var(--clr-blue);
-        }
+    &.active {
+        color: var(--clr-blue);
     }
 }
 
@@ -147,7 +151,9 @@ ul {
     }
 
     li {
+        cursor: grab;
         &.dragging {
+            cursor: grabbing;
             opacity: 0.5;
         }
         & > * {
@@ -252,16 +258,37 @@ ul {
         color: var(--clr-text);
         font-weight: 600;
     }
+}
+.tab-list {
+    display: flex;
+    gap: 18px;
+    &.list-desktop {
+        @media (max-width: 767.98px) {
+            display: none;
+        }
+    }
 
-    .tab-list {
-        display: flex;
-        gap: 18px;
+    &.list-mobile {
+        display: none;
+        @media (max-width: 767.98px) {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: var(--clr-content-bg);
+        }
     }
 }
 
 .content-none {
     text-align: center;
     padding: 20px;
+}
+.text-center {
+    text-align: center;
+}
+.pb-50 {
+    padding-bottom: 50px;
+    opacity: 0.5;
 }
 .fade-in-left {
     animation: fadeInLeft 0.4s forwards;

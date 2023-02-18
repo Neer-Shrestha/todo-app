@@ -49,7 +49,7 @@ themeToggler.addEventListener("click", () => {
 
 // nav tab
 const navTabContainer = document.querySelector(".nav-tabs");
-const navBtn = navTabContainer.querySelectorAll(".nav-btn");
+const navBtn = document.querySelectorAll(".nav-btn");
 const navTabContent = navTabContainer.querySelectorAll(".nav-tab");
 const listItems = navTabContainer.querySelectorAll("li");
 
@@ -137,6 +137,7 @@ function createTodoList(container, extraClass) {
     });
 
     container.appendChild(list);
+    updateCount();
 }
 
 // copied from WebDevSimplified youtube
@@ -162,6 +163,7 @@ if (todos) {
     todos.forEach((element) => {
         const isChecked = element.complete;
         addTodo(element.text, todoListAll, isChecked);
+        updateCount();
     });
 }
 
@@ -240,15 +242,23 @@ function updateLS() {
     });
 
     localStorage.setItem("todos", JSON.stringify(arr));
+    updateCount();
 }
 
 // clear
 const btnClear = document.querySelector(".btn-clear");
 btnClear.addEventListener("click", () => {
-    const completed = document.querySelectorAll(".complete");
+    const completed = document.querySelectorAll("span.complete");
     completed.forEach((complete) => {
         const parent = complete.parentElement.parentElement;
         parent.remove();
     });
     updateLS();
 });
+
+function updateCount() {
+    const todosCount = document.querySelector(".todos-count");
+    const count = document.querySelectorAll(".todo-list li").length;
+
+    todosCount.textContent = `${count} item left`;
+}
