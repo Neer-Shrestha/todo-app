@@ -80,7 +80,12 @@ navBtn.forEach((btn, index) => {
         }
         todoClassList.add(tag);
 
-        updateCount(tag);
+        const count = updateCount(tag);
+        if (count == 0) {
+            document.querySelector(".content-none").style.display = "block";
+        } else {
+            document.querySelector(".content-none").style.display = "none";
+        }
 
         removeThenAddClassInList(navBtn, "active", idx);
     });
@@ -266,7 +271,7 @@ function updateCount(status = "all") {
             count = document.querySelectorAll(".todo-list li").length;
             break;
         case "complete":
-            count = document.querySelectorAll(".text.completed").length;
+            count = document.querySelectorAll(".text.complete").length;
             break;
         case "active":
             count = document.querySelectorAll(".form-checkbox:not(.checked)").length;
@@ -274,4 +279,5 @@ function updateCount(status = "all") {
     }
 
     todosCount.textContent = `${count} item left`;
+    return count;
 }
